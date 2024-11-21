@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,15 +10,18 @@
             font-family: Arial, sans-serif;
             margin-top: 20%;
         }
+
         .message {
             font-size: 24px;
             margin-bottom: 20px;
         }
+
         .link {
             font-size: 14px;
             color: blue;
             text-decoration: none;
         }
+
         .link:hover {
             text-decoration: underline;
         }

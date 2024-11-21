@@ -39,17 +39,20 @@ public class PhieuLayHangDAO399 extends DAO399 {
                 // Khởi tạo danh sách mặt hàng và số lượng mặt hàng
                 List<String> danhSachMaMatHang = new ArrayList<>();
                 HashMap<String, Integer> soLuongMatHang = new HashMap<>();
+                HashMap<String, Double> donGiaMatHang = new HashMap<>();
 
                 // Lấy dữ liệu mặt hàng trong phiếu
                 while (rsMatHangTrongPhieu.next()) {
                     String maMatHang = rsMatHangTrongPhieu.getString("maMatHang");
                     int soLuong = rsMatHangTrongPhieu.getInt("soLuongMatHang");
+                    double donGia = rsMatHangTrongPhieu.getDouble("donGiaMatHang");
                     danhSachMaMatHang.add(maMatHang);
                     soLuongMatHang.put(maMatHang, soLuong);
+                    donGiaMatHang.put(maMatHang, donGia);
                 }
 
                 // Tạo đối tượng PhieuLayHang399 và trả về
-                phieuLayHang = new PhieuLayHang399(maPhieuLayHang, maDonHangResult, danhSachMaMatHang, soLuongMatHang);
+                phieuLayHang = new PhieuLayHang399(maPhieuLayHang, maDonHangResult, danhSachMaMatHang, soLuongMatHang, donGiaMatHang);
             }
         } catch (SQLException e) {
             e.printStackTrace();

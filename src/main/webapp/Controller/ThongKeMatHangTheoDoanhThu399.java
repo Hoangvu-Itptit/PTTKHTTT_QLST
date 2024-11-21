@@ -48,13 +48,12 @@ public class ThongKeMatHangTheoDoanhThu399 extends HttpServlet {
         var dsMHvaDoanhThu = new ArrayList<Map.Entry<MatHang399, Map.Entry<Integer, Double>>>();
         var donHangDAO = new DonHangDAO399();
         var phieuLayHangDAO = new PhieuLayHangDAO399();
-        var matHangDAO = new MatHangDAO399();
         var listDonHang = donHangDAO.getDanhSachDonHang(startDate, endDate);
         for (var dh : listDonHang) {
             var plh = phieuLayHangDAO.getPhieuLayHang(dh.maDonHang);
             for (var maMatHang : plh.danhSachMaMatHang) {
                 var soluong = plh.getSoLuongCuaMatHangTrongPhieu(maMatHang);
-                var giaTri = plh.getTongGiaTriCuaMatHangTrongPhieu(matHangDAO.getMatHang(maMatHang));
+                var giaTri = plh.getTongGiaTriCuaMatHangTrongPhieu(maMatHang);
                 if (dsMHvaDoanhThu.stream().noneMatch((entry) -> entry.getKey().maMatHang.equals(maMatHang))) {
                     dsMHvaDoanhThu.add(new AbstractMap.SimpleEntry<>(new MatHangDAO399().getMatHang(maMatHang), new AbstractMap.SimpleEntry<>(soluong, giaTri)));
                 } else {

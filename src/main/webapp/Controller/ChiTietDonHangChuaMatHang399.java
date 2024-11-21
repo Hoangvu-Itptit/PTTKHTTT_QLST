@@ -49,10 +49,10 @@ public class ChiTietDonHangChuaMatHang399 extends HttpServlet {
             giaTriMatHangTrongNgayDaChon += giaTri.getValue();
         }
         request.setAttribute("ordersJson", jsonArray.toString());
-        request.setAttribute("itemName", new MatHangDAO399().getMatHang(maMatHang).ten);
-        request.setAttribute("itemRevenue", (int) giaTriMatHangTrongNgayDaChon);
-        request.setAttribute("startDate", startDate);
-        request.setAttribute("endDate", endDate);
+        request.setAttribute("tenSanPham", new MatHangDAO399().getMatHang(maMatHang).ten);
+        request.setAttribute("giaTri", (int) giaTriMatHangTrongNgayDaChon);
+        request.setAttribute("ngayBatDau", startDate);
+        request.setAttribute("ngayKetThuc", endDate);
         request.getRequestDispatcher("GDChiTietMatHang399.jsp").forward(request, response);
     }
 
@@ -60,7 +60,6 @@ public class ChiTietDonHangChuaMatHang399 extends HttpServlet {
         var danhSachDonHangChuaMatHang = new ArrayList<Map.Entry<DonHang399, Map.Entry<Integer, Double>>>();
         var donHangDAO = new DonHangDAO399();
         var phieuLayHangDAO = new PhieuLayHangDAO399();
-        var matHangDAO = new MatHangDAO399();
         var danhSachDonHang = donHangDAO.getDanhSachDonHang(startDate, endDate);
 
         System.out.println(danhSachDonHang.size());
@@ -73,7 +72,7 @@ public class ChiTietDonHangChuaMatHang399 extends HttpServlet {
                                 donHang,
                                 new java.util.AbstractMap.SimpleEntry<>(
                                         phieuLayHang.getSoLuongCuaMatHangTrongPhieu(maMatHang),
-                                        phieuLayHang.getTongGiaTriCuaMatHangTrongPhieu(matHangDAO.getMatHang(maMatHang))
+                                        phieuLayHang.getTongGiaTriCuaMatHangTrongPhieu(maMatHang)
                                 )
                         )
                 );

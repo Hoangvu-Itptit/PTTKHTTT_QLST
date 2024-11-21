@@ -9,6 +9,7 @@
             margin-top: 20%;
             font-family: Arial, sans-serif;
         }
+
         .input-field {
             display: block;
             margin: 10px auto;
@@ -17,6 +18,7 @@
             max-width: 400px;
             border-radius: 10px;
         }
+
         .button {
             padding: 10px 20px;
             font-size: 16px;

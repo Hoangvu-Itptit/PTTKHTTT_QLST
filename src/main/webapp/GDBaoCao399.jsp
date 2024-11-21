@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +15,7 @@
             height: 100vh;
             margin: 0;
         }
+
         .container {
             background-color: #fff;
             padding: 20px;
@@ -22,9 +23,11 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 300px;
         }
+
         .container h2 {
             margin-bottom: 20px;
         }
+
         .button {
             padding: 10px 20px;
             font-size: 16px;
@@ -36,22 +39,23 @@
             width: 100%;
             margin: 10px 0;
         }
+
         .button:hover {
             background-color: darkblue;
         }
     </style>
     <script>
-        function subThongKeTheoDoanhThu(){
+        function subThongKeTheoDoanhThu() {
             window.location.href = 'GDThongKeMatHangTheoDoanhThu399.jsp';
         }
     </script>
 </head>
 <body>
-    <div class="container">
-        <h2>Xem thong ke</h2>
-        <button class="button">Theo mat hang</button>
-        <button class="button">Theo nha cung cap</button>
-        <button class="button" onclick="subThongKeTheoDoanhThu()">Theo doanh thu</button>
-    </div>
+<div class="container">
+    <h2>Xem thong ke</h2>
+    <button class="button" id="subThongKeTheoMatHang">Theo mat hang</button>
+    <button class="button" id="subThongKeTheoNhaCungCap">Theo nha cung cap</button>
+    <button class="button" id="subThongKeTheoDoanhThu" onclick="subThongKeTheoDoanhThu()">Theo doanh thu</button>
+</div>
 </body>
 </html>

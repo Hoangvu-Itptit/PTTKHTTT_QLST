@@ -28,7 +28,7 @@ public class DangKi399 extends HttpServlet {
     private void getDangKi(HttpServletResponse response, String userName, String passWord, String name, String address, String sdt, String email) throws IOException {
         var thanhVienDAO = new ThanhVienDAO399();
         var thanhVien = new ThanhVien399("KH" + String.format("%03d", thanhVienDAO.soLuongKhachHang() + 1), userName, passWord, new ThongTin399(name, address, email, sdt));
-        if (thanhVienDAO.kiemTraThongTinKhachHang(thanhVien)) {
+        if (!thanhVienDAO.kiemTraThongTinKhachHang(thanhVien)) {
             thanhVienDAO.luuThongTinKhachHang(thanhVien);
             response.sendRedirect("GDThanhCong399.jsp");
             return;

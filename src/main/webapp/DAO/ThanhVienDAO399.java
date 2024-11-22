@@ -53,25 +53,27 @@ public class ThanhVienDAO399 extends DAO399 {
 
     public boolean kiemTraThongTinKhachHang(ThanhVien399 thanhVien) {
         PreparedStatement stmt = null;
+        ResultSet rs = null;
         try {
             // Truy vấn kiểm tra thông tin thành viên
-            String query = "INSERT INTO tblKhachHang399(tenDangNhap, matKhau, ten, diaChi, dienThoai, email) VALUES (?, ?, ?, ?, ?, ?)";
+            String query = "SELECT COUNT(*) FROM tblKhachHang399 WHERE tenDangNhap = ?";
             stmt = conn.prepareStatement(query);
             stmt.setString(1, thanhVien.tenDangNhap);
-            stmt.setString(2, thanhVien.matKhau);
-            stmt.setString(3, thanhVien.thongTin.ten);
-            stmt.setString(4, thanhVien.thongTin.diaChi);
-            stmt.setString(5, thanhVien.thongTin.sdt);
-            stmt.setString(6, thanhVien.thongTin.email);
 
             // Thực thi truy vấn
-            int result = stmt.executeUpdate();
-            return result > 0;
+            rs = stmt.executeQuery();
+
+            // Kiểm tra kết quả
+            if (rs.next()) {
+                int count = rs.getInt(1); // Lấy số lượng kết quả
+                return count > 0; // Trả về true nếu có ít nhất một bản ghi
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             // Đóng các tài nguyên
             try {
+                if (rs != null) rs.close();
                 if (stmt != null) stmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();

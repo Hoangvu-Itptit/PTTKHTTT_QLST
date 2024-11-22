@@ -50,4 +50,90 @@ public class ThanhVienDAO399 extends DAO399 {
         }
         return thanhVien;
     }
+
+    public boolean kiemTraThongTinKhachHang(ThanhVien399 thanhVien) {
+        PreparedStatement stmt = null;
+        try {
+            // Truy vấn kiểm tra thông tin thành viên
+            String query = "INSERT INTO tblKhachHang399(tenDangNhap, matKhau, ten, diaChi, dienThoai, email) VALUES (?, ?, ?, ?, ?, ?)";
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, thanhVien.tenDangNhap);
+            stmt.setString(2, thanhVien.matKhau);
+            stmt.setString(3, thanhVien.thongTin.ten);
+            stmt.setString(4, thanhVien.thongTin.diaChi);
+            stmt.setString(5, thanhVien.thongTin.sdt);
+            stmt.setString(6, thanhVien.thongTin.email);
+
+            // Thực thi truy vấn
+            int result = stmt.executeUpdate();
+            return result > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Đóng các tài nguyên
+            try {
+                if (stmt != null) stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public void luuThongTinKhachHang(ThanhVien399 thanhVien) {
+        PreparedStatement stmt = null;
+        try {
+            // Truy vấn lưu thông tin thành viên
+            String query = "INSERT INTO tblKhachHang399(maThanhVien, tenDangNhap, matKhau, ten, diaChi, dienThoai, email) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, thanhVien.maThanhVien);
+            stmt.setString(2, thanhVien.tenDangNhap);
+            stmt.setString(3, thanhVien.matKhau);
+            stmt.setString(4, thanhVien.thongTin.ten);
+            stmt.setString(5, thanhVien.thongTin.diaChi);
+            stmt.setString(6, thanhVien.thongTin.sdt);
+            stmt.setString(7, thanhVien.thongTin.email);
+
+            // Thực thi truy vấn
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Đóng các tài nguyên
+            try {
+                if (stmt != null) stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public int soLuongKhachHang() {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            // Truy vấn lấy số lượng thành viên
+            String query = "SELECT COUNT(*) AS soLuong FROM tblKhachHang399";
+            stmt = conn.prepareStatement(query);
+
+            // Thực thi truy vấn
+            rs = stmt.executeQuery();
+
+            // Kiểm tra kết quả và trả về số lượng thành viên
+            if (rs.next()) {
+                return rs.getInt("soLuong");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Đóng các tài nguyên
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
 }

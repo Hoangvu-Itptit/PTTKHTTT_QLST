@@ -12,4 +12,6 @@ public class ThanhVien399 {
         this.matKhau = matKhau;
         this.thongTin = thongTin;
     }
+
+
 }

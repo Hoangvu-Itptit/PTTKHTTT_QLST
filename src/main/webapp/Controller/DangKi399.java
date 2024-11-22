@@ -1,6 +1,8 @@
 package Controller;
 
-import jakarta.servlet.ServletException;
+import DAO.*;
+import Model.ThanhVien399;
+import Model.ThongTin399;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,7 +14,7 @@ import java.io.IOException;
 public class DangKi399 extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         var userName = request.getParameter("userName");
         var passWord = request.getParameter("passWord");
         var name = request.getParameter("name");
@@ -24,7 +26,13 @@ public class DangKi399 extends HttpServlet {
     }
 
     private void getDangKi(HttpServletResponse response, String userName, String passWord, String name, String address, String sdt, String email) throws IOException {
-        System.out.println("Button clicked!");
+        var thanhVienDAO = new ThanhVienDAO399();
+        var thanhVien = new ThanhVien399("KH" + String.format("%03d", thanhVienDAO.soLuongKhachHang() + 1), userName, passWord, new ThongTin399(name, address, email, sdt));
+        if (thanhVienDAO.kiemTraThongTinKhachHang(thanhVien)) {
+            thanhVienDAO.luuThongTinKhachHang(thanhVien);
+            response.sendRedirect("GDThanhCong399.jsp");
+            return;
+        }
         response.sendRedirect("GDThatBai399.jsp");
     }
 }
